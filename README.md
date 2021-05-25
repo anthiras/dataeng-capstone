@@ -6,9 +6,9 @@ This repo contains my solution for the Data Engineering Capstone Project of the 
 
 ### 1.1 Data
 
-The data I will be using for this projects is a dataset of U.S. flights in 2019 [1], including origin and destination airports, expected and actual departure/arrival times, etc. This will be combined with another dataset of airports [2] that includes basic information about airports, e.g. airport code, airport type, and location information.
+The data I will be using for this project is a dataset of U.S. flights in 2019 [1], including origin and destination airports, expected and actual departure/arrival times, etc. This will be combined with another dataset of airports [2] that includes basic airport information, e.g. airport code, airport type, and location information.
 
-The airport data is a JSON file containing 57,421 airports, while the flight data is one CSV file per month of the year 2019, for a total of approx. 6 million flights.
+The airport data is a JSON file containing 57,421 airports, while the flight data is one CSV file per month of the year 2019, for a total of 7,422,037 flights.
 
 ### 1.2 Goals
 
@@ -22,7 +22,7 @@ Use cases:
 
 ## 2. Data exploration
 
-Please see `Data exploration.ipynb` where I take a look at a subset of the available data using pandas.
+Please see [Data exploration.ipynb](Data exploration.ipynb) where I take a look at a subset of the available data using pandas.
 
 ## 3. Choice of tools
 
@@ -105,7 +105,7 @@ Delays and number of total flights are obtained from the flight data. This will 
 
 ## 5. Output
 
-The output of the three queries above is included here:
+The outputs of the three queries above are included here:
 
 ### 5.1 Delayed routes
 

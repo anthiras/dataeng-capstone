@@ -22,7 +22,7 @@ Use cases:
 
 ## 2. Data exploration
 
-Please see [Data exploration.ipynb](Data exploration.ipynb) where I take a look at a subset of the available data using pandas.
+Please see `Data exploration.ipynb` where I take a look at a subset of the available data using pandas.
 
 ## 3. Choice of tools
 

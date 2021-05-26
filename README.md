@@ -79,7 +79,13 @@ The airport code is in both datasets and should be used as the join condition fo
 
 **Airport type statistics**
 
-For the airport type statistics use case I need to provide a set of statistics for each of the airport types (small/medium/large) airports. For this reason I will set up the data model as table with a row for each airport type and columns for total flights, cancelled flights, cancellation rate, average delay within each type of delay, as well as the average total delay. This way the Spark process can compute the aggregated statistics and present it in a short table. The cancelleration rate can be calculated by comparing cancelled flights to total flights. Since flights have both an origin and destination airport, I choose the origin airport for this use case, but the same statistics could be calculated the same way for the destination airport type.
+For the airport type statistics use case I need to provide a set of statistics for each of the airport types (small/medium/large) airports. For this reason I will set up the data model as table with a row for each airport type and columns for total flights, cancelled flights, cancellation rate, average delay within each type of delay, as well as the average total delay.
+
+This way the Spark process can compute the aggregated statistics and present it in a short table.
+
+The cancelleration rate can be calculated by comparing cancelled flights to total flights.
+
+Since flights have both an origin and destination airport, I choose the origin airport for this use case, but the same statistics could be calculated the same way for the destination airport type.
 
 | Column                  | Type   | Description                                                        |
 | ----------------------- | ------ | ------------------------------------------------------------------ |

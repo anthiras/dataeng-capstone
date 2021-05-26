@@ -48,8 +48,6 @@ Based on these considerations, I will choose Apache Spark for this project.
 
 ### 4.1 ETL overview
 
-Since I will be transforming the data as part of the query with Apache Spark, I will end up with data models representing the query output.
-
 The ETL pipeline and query will be a unified process following this structure:
 
 1. Load flights and airports data.
@@ -60,11 +58,15 @@ The ETL pipeline and query will be a unified process following this structure:
 
 ### 4.2 Data models
 
-For the three use cases mentioned above I end up with the following data models:
+Since I will be transforming the data as part of the query with Apache Spark, I will end up with data models representing the query output.
+
+For the three use cases mentioned above I will set up the following data models:
 
 **Delayed routes**
 
-Delayed routes will contain origin and destination airport (name from airports data), average delay, and total flights aggregated from the flight data. The airport code is in both datasets and should be used as the join condition.
+For delayed routes, the data model needs to include origin and destination airport as well as the average delay and total flights aggregated from the flight data. The data should be sorted by descending average delay. This way the model will support the use case by providing an easy overview of the most delayed routes.
+
+The airport code is in both datasets and should be used as the join condition for the origin and destination airport. Airport names will be populated from the airport dataset, and flight statistics will be aggregated from the flights data.
 
 | Column        | Type   | Description                           |
 | ------------- | ------ | ------------------------------------- |
@@ -77,7 +79,7 @@ Delayed routes will contain origin and destination airport (name from airports d
 
 **Airport type statistics**
 
-Delays, number of total and cancelled flights are obtained from the flight data. Joining with the airports data on the origin airport code will provide the airport type, and the data can be aggregated by grouping on the airport type column. Cancelleration rate is a calculated value, comparing cancelled flights to total flights.
+For the airport type statistics use case I need to provide a set of statistics for each of the airport types (small/medium/large) airports. For this reason I will set up the data model as table with a row for each airport type and columns for total flights, cancelled flights, cancellation rate, average delay within each type of delay, as well as the average total delay. This way the Spark process can compute the aggregated statistics and present it in a short table. The cancelleration rate can be calculated by comparing cancelled flights to total flights. Since flights have both an origin and destination airport, I choose the origin airport for this use case, but the same statistics could be calculated the same way for the destination airport type.
 
 | Column                  | Type   | Description                                                        |
 | ----------------------- | ------ | ------------------------------------------------------------------ |
@@ -94,7 +96,9 @@ Delays, number of total and cancelled flights are obtained from the flight data.
 
 **Elevation statistics**
 
-Delays and number of total flights are obtained from the flight data. This will be grouped by the destination airport elevation level from the airport data, and average statistics will be calculated. The elevation in feet is grouped into thousands (0-999 feet, 1000-1999, 2000-2999 feet etc.).
+To produce elevation statistics, the elevation level in feet from the aiports data can be used. However, aggregating per individual foot is not very useful, so in the data model, a grouping of elevation levels will be needed.
+
+For this reason the data model should include a computed elevation level, and I will use groups of 1000 feet (0-999 feet, 1000-1999, 2000-2999 feet etc.). The remaining columns should contain statistics aggregated over these groups, i.e. total flights and average delays within each elevation group:
 
 | Column                  | Type   | Description                                                                             |
 | ----------------------- | ------ | --------------------------------------------------------------------------------------- |

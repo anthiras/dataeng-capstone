@@ -111,7 +111,7 @@ Delays and number of total flights are obtained from the flight data. This will 
 
 The following diagram shows the relation of the flight/airport datasets, as well as how the analytical models relate to the flight/airport data:
 
-![ER diagram](https://github.com/anthiras/dataeng-capstone/erd/img.png)
+![ER diagram](https://github.com/anthiras/dataeng-capstone/raw/master/erd/img.png)
 
 ## 5. Output
 

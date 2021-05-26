@@ -46,6 +46,8 @@ Based on these considerations, I will choose Apache Spark for this project.
 
 ## 4 Data models and ETL
 
+### 4.1 ETL overview
+
 Since I will be transforming the data as part of the query with Apache Spark, I will end up with data models representing the query output.
 
 The ETL pipeline and query will be a unified process following this structure:
@@ -55,6 +57,8 @@ The ETL pipeline and query will be a unified process following this structure:
 3. Preprocess flights: Calculate total delay as sum of each delay type. Add a boolean cancelled column, calculated from the numeric cancelled column.
 4. Combine flights and airports data using the origin and/or destination airport code from the flight data to look up the airport in the airport data.
 5. Filter, group, and aggregate data depending on use case.
+
+### 4.2 Data models
 
 For the three use cases mentioned above I end up with the following data models:
 
@@ -102,6 +106,12 @@ Delays and number of total flights are obtained from the flight data. This will 
 | avg_nas_delay           | double | Delay caused by the National Airspace System                                            |
 | avg_security_delay      | double | Average security delay                                                                  |
 | avg_late_aircraft_delay | double | Average late aircraft delay                                                             |
+
+### 4.3 ER diagram
+
+The following diagram shows the relation of the flight/airport datasets, as well as how the analytical models relate to the flight/airport data:
+
+![ER diagram](https://github.com/anthiras/dataeng-capstone/erd/img.png)
 
 ## 5. Output
 
